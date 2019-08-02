@@ -10,9 +10,9 @@ extern Book books[];
 extern Book* find_book();
 
 
-
 int main(int argc, char** argv) {
-
+    bool cover_problem, indexing_problem, bar_code_problem,spine_pages_problem, missing_pages_problem, stained_pages_problem;
+    int yes_or_no;
     unsigned int book_copies_number;
     unsigned int i;
     int internal_num;
@@ -46,8 +46,57 @@ int main(int argc, char** argv) {
             needed_book = find_book(internal_num);
         }
 
-        bc = (BookCopy*)malloc(sizeof(BookCopy));
-        init_copy(bc, internal_num);
+
+        printf("for the next questions insert 1 for Yes, 0 for No :");
+        printf("is the condition of the book cover not ok ?");
+        scanf("%d", &yes_or_no);
+        if(yes_or_no == 1){
+            cover_problem = true;
+        }else{
+            cover_problem = false;
+        }
+
+        printf("is the condition of the book indexing not ok ?");
+        scanf("%d", &yes_or_no);
+        if(yes_or_no == 1){
+            indexing_problem = true;
+        }else{
+            indexing_problem = false;
+        }
+
+        printf("is the condition of the book bar code not ok ?");
+        scanf("%d", &yes_or_no);
+        if(yes_or_no == 1){
+            bar_code_problem = true;
+        }else{
+            bar_code_problem = false;
+        }
+
+        printf("is there any spine  pages in the book ?");
+        scanf("%d", &yes_or_no);
+        if(yes_or_no == 1){
+            spine_pages_problem = true;
+        }else{
+            spine_pages_problem = false;
+        }
+        printf("is there any missing pages from the book ?");
+        scanf("%d", &yes_or_no);
+        if(yes_or_no == 1){
+            missing_pages_problem = true;
+        }else{
+            missing_pages_problem = false;
+        }
+
+        printf("is there any stained pages from the book ?");
+        scanf("%d", &yes_or_no);
+        if(yes_or_no == 1){
+            stained_pages_problem = true;
+        }else{
+            stained_pages_problem = false;
+        }
+
+
+        bc = create_copy(internal_num, cover_problem, indexing_problem, bar_code_problem,spine_pages_problem, missing_pages_problem, stained_pages_problem);
         book_copies[j] = *bc;
         print_copy(&book_copies[j]);
         free(bc);
