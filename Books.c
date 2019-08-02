@@ -42,7 +42,6 @@ void print_copy(BookCopy *book){
     if(is_useless(book)){
         printf("the book is useless");
     }
-
 }
 
 
