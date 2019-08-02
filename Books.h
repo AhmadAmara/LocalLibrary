@@ -12,8 +12,15 @@
 #include <errno.h>
 #include <stdlib.h>
 
-enum zone_type{KIDS, HIGHSCHOOL, ADULT, DOCUMENTARY, COMICS};
+#define cover_mask 0x1
+#define indexing_mask 0x2
+#define bar_code_mask 0x4
+#define spine_pages_mask 0x8
+#define missing_pages_mask 0x10
+#define stained_pages_mask 0x20
 
+
+enum zone_type{KIDS, HIGHSCHOOL, ADULT, DOCUMENTARY, COMICS};
 
 typedef struct Book Book;
 typedef struct BookCopy BookCopy;
@@ -30,6 +37,8 @@ struct BookCopy{
     int internal_book_num;
     int serial_num; /*(10,000—1,000,000,000)*/
     bool is_borrowed; /*true if the book is currently borrowed.*/
+    int borrowing_times;
+    unsigned int condition: 6;
 };
 
 
@@ -42,4 +51,7 @@ void print_copy(BookCopy *book);
 void init_copy(BookCopy *book, int internal_numm);
 
 void borrow_copy(BookCopy *book_copy, bool is_borrowing );
+
+BookCopy* create_copy(int internal_num, bool cover_problem, bool indexing_problem, bool bar_code_problem,
+                        bool spine_pages_problem, bool missing_pages_problem, bool stained_pages_problem);
 #endif /*PRE_COURSE_1_C_AHMADAMARA_BOOKS_H */

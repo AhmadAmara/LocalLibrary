@@ -3,7 +3,6 @@
 /*/
 #include "local_library.h"
 
-
 Book books[] = {
         {1001, "Sun Don't Shine", 40, ADULT},
         {1002, "Irma la dos", -100, DOCUMENTARY},
@@ -27,7 +26,6 @@ Book books[] = {
         {1020, "Raining Stones", -83, DOCUMENTARY}
 };
 
-
 const Book* first_book(){
     return &books[0];
 }
@@ -36,17 +34,34 @@ int num_of_books(){
     return (sizeof(books)/sizeof(books[0]));
 }
 
-char* get_name_of_book(int internal_num){
+Book* find_book(int internal_num) {
+
     int i;
-    for(i = 0; i < num_of_books(); i++){
-        if(books[i].book_num == internal_num){
-            return books[i].name;
+    if(0 > internal_num || internal_num > 50000){
+        printf("Invalid internal number ! ");
+        return NULL;
+    }
+    for (i = 0; i < num_of_books(); i++) {
+        if (books[i].book_num == internal_num) {
+            return &books[i];
         }
     }
     return NULL;
 }
 
-int main(){
-    printf("%d",num_of_books());
+char* get_name_of_book(int internal_num) {
+
+    Book *founded_book = find_book(internal_num);
+    if (founded_book) {
+        return founded_book->name;
+    } else {
+        return NULL;
+
+    }
+}
+
+int main3(){
+    printf("%d\n",num_of_books());
+    printf("%s",get_name_of_book(1015));
     return 0;
 }
