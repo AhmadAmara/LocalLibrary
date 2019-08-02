@@ -26,6 +26,22 @@ void print_copy(BookCopy *book){
     printf("serial_num number = %d\n", book->serial_num);
     printf("is_borrowed = %s\n", book->is_borrowed ? "true":"false");
     printf("borrowing times = %d\n", book->borrowing_times);
+    printf("book condition :\n");
+    if(is_librarian_required(book)){
+        printf("librarian required\n");
+    }
+    if(is_bookbinder_required(book)){
+        printf(("bookbinder_required\n"));
+    }
+    if(is_repairable(book)){
+        printf("the book is repairable\n");
+    }
+    if(is_ok(book)){
+        printf("the book condition is ok\n");
+    }
+    if(is_useless(book)){
+        printf("the book is useless");
+    }
 
 }
 
@@ -48,7 +64,6 @@ void init_copy(BookCopy *book, int internal_numm){
     book->is_borrowed = false;
     book->borrowing_times = 0;
     book->condition = 0;
-
 }
 
 
@@ -67,7 +82,7 @@ void update_book_condition(BookCopy* new_book, bool cover_problem, bool indexing
         new_book->condition |= spine_pages_mask;
     }
     if(missing_pages_problem){
-        new_book->condition |= missing_pages_problem;
+        new_book->condition |= missing_pages_mask;
     }
     if(stained_pages_problem){
         new_book->condition |= stained_pages_mask;
@@ -93,5 +108,47 @@ BookCopy* create_copy(int internal_num, bool cover_problem, bool indexing_proble
 
     return new_book;
 }
+
+
+bool is_librarian_required(BookCopy* book){
+    return book->condition & cover_mask || book->condition & indexing_mask || book->condition & bar_code_mask;
+}
+
+
+bool is_bookbinder_required(BookCopy* book){
+    return book->condition & missing_pages_mask || book->condition & spine_pages_mask
+                                                || book->condition & stained_pages_mask;
+}
+
+bool is_repairable(BookCopy* book){
+    return !(book->condition & missing_pages_mask || book->condition & stained_pages_mask);
+}
+
+
+bool is_ok(BookCopy* book){
+    return book->condition == 0;
+}
+
+bool is_useless(BookCopy* book){
+    int j;
+    int mask =1;
+    int counter = 0;
+    for(j = 0; j < 6; j++){
+        if(book->condition & mask){
+            counter++;
+        }
+        mask *= 2;
+    }
+    return counter >= 4;
+}
+
+bool are_in_same_condition(BookCopy* book1, BookCopy* book2){
+    return (book1->condition ^ book2->condition) == 0;
+}
+
+
+
+
+
 
 

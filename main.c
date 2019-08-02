@@ -8,34 +8,28 @@
 
 extern Book books[];
 extern Book* find_book();
-extern void init_copy(BookCopy *book, int internal_numm);
 
 
 
-int main(){
-    int a;
-    a = 0;
-    a |= 2;
-    printf("%d", a);
-    return 0;
-}
+int main(int argc, char** argv) {
 
-int main4(int argc, char** argv) {
-
-
-    int i;
+    unsigned int book_copies_number;
+    unsigned int i;
     int internal_num;
-    int j;
-    BookCopy book_copies[10];
+    unsigned int j;
+    BookCopy *book_copies;
     Book *needed_book;
     BookCopy *bc;
     int choice;
+    printf("Please input the number of book copies you want : ");
+    scanf("%u", &book_copies_number);
+    book_copies = (BookCopy*)malloc(book_copies_number * sizeof(BookCopy));
 
     for(i = 0; i < num_of_books(); i++){
         print_book(&books[i]);
     }
     
-    for(j = 0; j < 10; j++){
+    for(j = 0; j < book_copies_number; j++){
 
         printf("Please input an internal book number : ");
         scanf("%d", &internal_num);

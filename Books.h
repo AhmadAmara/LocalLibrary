@@ -54,4 +54,14 @@ void borrow_copy(BookCopy *book_copy, bool is_borrowing );
 
 BookCopy* create_copy(int internal_num, bool cover_problem, bool indexing_problem, bool bar_code_problem,
                         bool spine_pages_problem, bool missing_pages_problem, bool stained_pages_problem);
+
+bool is_librarian_required(BookCopy* book);
+bool is_bookbinder_required(BookCopy* book);
+bool is_repairable(BookCopy* book);
+bool is_ok(BookCopy* book);
+bool is_useless(BookCopy* book);
+bool are_in_same_condition(BookCopy* book1, BookCopy* book2);
+
+
+
 #endif /*PRE_COURSE_1_C_AHMADAMARA_BOOKS_H */
