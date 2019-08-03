@@ -13,34 +13,34 @@ char* get_zone_name(enum zone_type type){
 
 
 void print_book(Book *book){
-    printf(" ### book details ### \n");
-    printf("book name = %s\n", book->name);
-    printf("book number = %d\n", book->book_num);
-    printf("promotion = %d\n", book->promotion);
-    printf("zone_type = %s\n\n", get_zone_name(book->zone));
+    printf(BOOK_DETAILS_MESSAGE);
+    printf(BOOK_NAME_FORMAT, book->name);
+    printf(BOOK_NUM_FORMAT, book->book_num);
+    printf(BOOK_PROM_FORMAT, book->promotion);
+    printf(ZONE_TYPE_FORMAT, get_zone_name(book->zone));
 }
 
 
 void print_copy(BookCopy *book){
-    printf("internal_book_num = %d\n", book->internal_book_num);
-    printf("serial_num number = %d\n", book->serial_num);
-    printf("is_borrowed = %s\n", book->is_borrowed ? "true":"false");
-    printf("borrowing times = %d\n", book->borrowing_times);
-    printf("book condition :\n");
+    printf(BOOK_INTERNAL_NUM_FORMAT, book->internal_book_num);
+    printf(BOOK_SERIAL_NUM_FORMAT, book->serial_num);
+    printf(IS_BORROWED_FORMAT, book->is_borrowed ? "true":"false");
+    printf(BORROWING_TIMES_FORMAT, book->borrowing_times);
+    printf(BOOK_COND_FORMAT);
     if(is_librarian_required(book)){
-        printf("librarian required\n");
+        printf(LIBRARIAN_MESSAGE);
     }
     if(is_bookbinder_required(book)){
-        printf(("bookbinder_required\n"));
+        printf((BOOKBINDER_MESSAGE));
     }
     if(is_repairable(book)){
-        printf("the book is repairable\n");
+        printf(REPAIRABLE_MESSAGE);
     }
     if(is_ok(book)){
-        printf("the book condition is ok\n");
+        printf(OK_COND_MESSAGE);
     }
     if(is_useless(book)){
-        printf("the book is useless");
+        printf(USELESS_MESSAGE);
     }
 }
 
@@ -48,7 +48,7 @@ void print_copy(BookCopy *book){
 void borrow_copy(BookCopy *book_copy,bool is_borrowing ){
     book_copy->borrowing_times++;
     if(is_borrowing == book_copy->is_borrowed){
-        printf((const char *) stderr, "book is already borrowed while trying to borrow it, or is not borrowed while trying to return it to the library");
+        printf((const char *) stderr, BORROWING_ERROR_MESSAGE);
         exit(-1);
     }
 
@@ -56,13 +56,13 @@ void borrow_copy(BookCopy *book_copy,bool is_borrowing ){
 }
 
 void init_copy(BookCopy *book, int internal_numm){
-    static int current_serial_num = 10000;
+    static int current_serial_num = FIRST_SERIAL_NUM;
     book->internal_book_num = internal_numm;
     book->serial_num = current_serial_num;
     current_serial_num++;
     book->is_borrowed = false;
     book->borrowing_times = 0;
-    book->condition = 0;
+    book->condition = ZERO_BITS;
 }
 
 
@@ -95,7 +95,7 @@ BookCopy* create_copy(int internal_num, bool cover_problem, bool indexing_proble
 
 
     if(0 > internal_num || internal_num > 50000){
-        printf("Invalid internal number ! ");
+        printf(INVALID_INTERNAL_NUM_MESSAGE);
         return NULL;
     }
 

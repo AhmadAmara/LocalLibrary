@@ -38,7 +38,7 @@ Book* find_book(int internal_num) {
 
     int i;
     if(0 > internal_num || internal_num > 50000){
-        printf("Invalid internal number ! ");
+        printf(INVALID_INTERNAL_NUM_MESSAGE);
         return NULL;
     }
     for (i = 0; i < num_of_books(); i++) {
@@ -58,10 +58,4 @@ char* get_name_of_book(int internal_num) {
         return NULL;
 
     }
-}
-
-int main3(){
-    printf("%d\n",num_of_books());
-    printf("%s",get_name_of_book(1015));
-    return 0;
 }
