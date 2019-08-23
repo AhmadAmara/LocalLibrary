@@ -42,11 +42,24 @@ struct BookCopy{
     unsigned int condition: 6;
 };
 
+typedef struct DRAMA{
+    int text_quality;
+    int plot_quality;
+}DRAMA;
+
+typedef struct COMEDY{
+    int humor_quality;
+    char Humor_type;
+}COMEDY;
+
+union genre{
+    DRAMA _DRAMA;
+    float _THRILLER;
+    COMEDY _COMEDY;
+    
 
 
-/*union genre{
-
-};*/
+};
 
 void get_nice_book_name(char* dst, char* src);
 
