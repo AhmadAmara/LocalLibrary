@@ -21,15 +21,16 @@
 
 
 enum zone_type{KIDS, HIGHSCHOOL, ADULT, DOCUMENTARY, COMICS};
+typedef enum zone_type  zone_type;
 
 typedef struct Book Book;
 typedef struct BookCopy BookCopy;
 
 struct Book{
-    int book_num; /*internal book number (0—50,000)*/
+    unsigned short book_num; /*internal book number (0—50,000)*/
     char  name[MAX_BOOK_NAME_LEN]; /*no longer than 50 characters*/
-    int promotion; /*a number between -100 [less promoted] to 100 [most promoted]*/
-    enum zone_type zone;
+    char promotion; /*a number between -100 [less promoted] to 100 [most promoted]*/
+    zone_type zone;
 
 };
 
@@ -42,7 +43,15 @@ struct BookCopy{
 };
 
 
-char* get_zone_name(enum zone_type type);
+
+/*union genre{
+
+};*/
+
+void get_nice_book_name(char* dst, char* src);
+
+
+char* get_zone_name(zone_type type);
 
 void print_book(Book *book);
 
@@ -50,7 +59,7 @@ void print_copy(BookCopy *book);
 
 void init_copy(BookCopy *book, int internal_numm);
 
-void borrow_copy(BookCopy *book_copy, bool is_borrowing );
+int borrow_copy(BookCopy *book_copy, bool is_borrowing );
 
 BookCopy* create_copy(int internal_num, bool cover_problem, bool indexing_problem, bool bar_code_problem,
                         bool spine_pages_problem, bool missing_pages_problem, bool stained_pages_problem);

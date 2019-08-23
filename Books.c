@@ -5,7 +5,7 @@
 #include "Books.h"
 static char* types_arr[5] =  {"KIDS", "HIGHSCHOOL", "ADULT", "DOCUMENTARY", "COMICS"};
 
-char* get_zone_name(enum zone_type type){
+char* get_zone_name(zone_type type){
 
     return types_arr[type] ;
 
@@ -24,7 +24,7 @@ void print_book(Book *book){
 void print_copy(BookCopy *book){
     printf(BOOK_INTERNAL_NUM_FORMAT, book->internal_book_num);
     printf(BOOK_SERIAL_NUM_FORMAT, book->serial_num);
-    printf(IS_BORROWED_FORMAT, book->is_borrowed ? "true":"false");
+    printf(IS_BORROWED_FORMAT, book->is_borrowed ? "Yes":"No");
     printf(BORROWING_TIMES_FORMAT, book->borrowing_times);
     printf(BOOK_COND_FORMAT);
     if(is_librarian_required(book)){
@@ -45,14 +45,15 @@ void print_copy(BookCopy *book){
 }
 
 
-void borrow_copy(BookCopy *book_copy,bool is_borrowing ){
+int borrow_copy(BookCopy *book_copy,bool is_borrowing ){
     book_copy->borrowing_times++;
     if(is_borrowing == book_copy->is_borrowed){
         printf((const char *) stderr, BORROWING_ERROR_MESSAGE);
-        exit(-1);
+        return -1;
     }
 
     book_copy->is_borrowed = is_borrowing;
+    return 0;
 }
 
 void init_copy(BookCopy *book, int internal_numm){
@@ -143,6 +144,24 @@ bool is_useless(BookCopy* book){
 
 bool are_in_same_condition(BookCopy* book1, BookCopy* book2){
     return (book1->condition ^ book2->condition) == 0;
+}
+
+void get_nice_book_name(char *dst, char *src) {
+    int i;
+
+    if( src[0] >= 'a' && src[0] <= 'z'){
+        dst[0] = (char) ((int) src[0] - 32);
+    }else{
+        dst[0] = src[0] ;
+    }
+    for (i = 1; src[i]!='\0'; i++) {
+        if(src[i] >= 'A' && src[i] <= 'Z') {
+            dst[i] = (char) ((int) src[i] + 32);
+        }else{
+            dst[i] = src[i];
+        }
+    }
+    dst[i] = '\0';
 }
 
 

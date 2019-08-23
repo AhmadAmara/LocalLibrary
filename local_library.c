@@ -31,13 +31,13 @@ const Book* first_book(){
 }
 
 int num_of_books(){
-    return (sizeof(books)/sizeof(books[0]));
+    return (sizeof(books)/sizeof(Book));
 }
 
 Book* find_book(int internal_num) {
 
     int i;
-    if(0 > internal_num || internal_num > 50000){
+    if(0 > internal_num || internal_num > MAX_INTERNAL_NUM){
         printf(INVALID_INTERNAL_NUM_MESSAGE);
         return NULL;
     }

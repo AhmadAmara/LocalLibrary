@@ -6,6 +6,7 @@
 #define PRE_COURSE_1_C_AHMADAMARA_BOOKS_CONSTANTS_H
 
 #define MAX_BOOK_NAME_LEN 50
+#define MAX_INTERNAL_NUM 50000
 #define BOOK_DETAILS_MESSAGE "### book details ###\n"
 #define BOOK_NAME_FORMAT "book name = %s\n"
 #define BOOK_NUM_FORMAT "book number = %d\n"

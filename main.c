@@ -10,7 +10,7 @@ extern Book books[];
 extern Book* find_book();
 
 
-int main(int argc, char** argv) {
+int main2(int argc, char** argv) {
     bool cover_problem, indexing_problem, bar_code_problem,spine_pages_problem, missing_pages_problem, stained_pages_problem;
     int yes_or_no;
     unsigned int book_copies_number;
@@ -46,7 +46,7 @@ int main(int argc, char** argv) {
             needed_book = find_book(internal_num);
         }
 
-
+        /*TODO put in outer function*/
         printf("for the next questions insert 1 for Yes, 0 for No :");
         printf("is the condition of the book cover not ok ?");
         scanf("%d", &yes_or_no);
