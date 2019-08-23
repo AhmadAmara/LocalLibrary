@@ -66,6 +66,7 @@ struct Book{
 
 void get_nice_book_name(char* dst, char* src);
 
+char* get_genre_info(genre g, genre_type gt);
 
 char* get_zone_name(zone_type type);
 

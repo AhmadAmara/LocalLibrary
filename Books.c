@@ -12,12 +12,14 @@ char* get_zone_name(zone_type type){
 }
 
 
+
 void print_book(Book *book){
     printf(BOOK_DETAILS_MESSAGE);
     printf(BOOK_NAME_FORMAT, book->name);
     printf(BOOK_NUM_FORMAT, book->book_num);
     printf(BOOK_PROM_FORMAT, book->promotion);
     printf(ZONE_TYPE_FORMAT, get_zone_name(book->zone));
+    print(GENRE_INFO_FORMAT, get_genre_info(book->_genre, book->gt))
 }
 
 
@@ -162,6 +164,13 @@ void get_nice_book_name(char *dst, char *src) {
         }
     }
     dst[i] = '\0';
+}
+
+char *get_genre_info(genre g, genre_type gt) {
+    
+    if(gt == 0){
+
+    }
 }
 
 
