@@ -23,16 +23,11 @@
 enum zone_type{KIDS, HIGHSCHOOL, ADULT, DOCUMENTARY, COMICS};
 typedef enum zone_type  zone_type;
 
+enum genre_type{DRAMA, THRILLER, COMEDY, NON_FICTION};
+typedef enum genre_type  genre_type;
+
 typedef struct Book Book;
 typedef struct BookCopy BookCopy;
-
-struct Book{
-    unsigned short book_num; /*internal book number (0—50,000)*/
-    char  name[MAX_BOOK_NAME_LEN]; /*no longer than 50 characters*/
-    char promotion; /*a number between -100 [less promoted] to 100 [most promoted]*/
-    zone_type zone;
-
-};
 
 struct BookCopy{
     int internal_book_num;
@@ -45,21 +40,29 @@ struct BookCopy{
 typedef struct DRAMA{
     int text_quality;
     int plot_quality;
-}DRAMA;
+}drama;
 
 typedef struct COMEDY{
     int humor_quality;
     char Humor_type;
-}COMEDY;
+}comedy;
 
-union genre{
-    DRAMA _DRAMA;
+typedef union genre{
+    drama _DRAMA;
     float _THRILLER;
-    COMEDY _COMEDY;
-    
+    comedy _COMEDY;
+}genre;
 
 
+struct Book{
+    unsigned short book_num; /*internal book number (0—50,000)*/
+    char  name[MAX_BOOK_NAME_LEN]; /*no longer than 50 characters*/
+    char promotion; /*a number between -100 [less promoted] to 100 [most promoted]*/
+    zone_type zone;
+    genre _genre;
+    genre_type gt;
 };
+
 
 void get_nice_book_name(char* dst, char* src);
 
