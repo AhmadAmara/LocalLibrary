@@ -121,7 +121,7 @@ int main(int argc, char** argv) {
                        flag = borrow_copy(&book_copies[i], false);
 
                     }
-                    
+
                 }
             }
         } else if (choice == 9) {
