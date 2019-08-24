@@ -75,7 +75,6 @@ char* get_genre_info(genre g, genre_type gt);
 typedef void (*action)(const struct Book*);
 
 void do_for_books(Book **books, unsigned int num, action)
-
 char* get_zone_name(zone_type type);
 
 void print_book(Book *book);
