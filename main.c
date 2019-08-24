@@ -10,20 +10,20 @@ extern Book books[];
 extern Book* find_book();
 
 
-int main2(int argc, char** argv) {
+int main(int argc, char** argv) {
     bool cover_problem, indexing_problem, bar_code_problem,spine_pages_problem, missing_pages_problem, stained_pages_problem;
     int yes_or_no;
     unsigned int book_copies_number;
     unsigned int i;
     int internal_num;
     unsigned int j;
-    BookCopy *book_copies;
+    BookCopy **book_copies;
     Book *needed_book;
     BookCopy *bc;
     int choice;
     printf("Please input the number of book copies you want : ");
     scanf("%u", &book_copies_number);
-    book_copies = (BookCopy*)malloc(book_copies_number * sizeof(BookCopy));
+    book_copies = (BookCopy**)malloc(book_copies_number * sizeof(BookCopy*));
 
     for(i = 0; i < num_of_books(); i++){
         print_book(&books[i]);
@@ -97,8 +97,8 @@ int main2(int argc, char** argv) {
 
 
         bc = create_copy(internal_num, cover_problem, indexing_problem, bar_code_problem,spine_pages_problem, missing_pages_problem, stained_pages_problem);
-        book_copies[j] = *bc;
-        print_copy(&book_copies[j]);
+        book_copies[j] = bc;
+        print_copy(book_copies[j]);
         free(bc);
 
     }
@@ -111,20 +111,23 @@ int main2(int argc, char** argv) {
             printf("Please input an serial book number : ");
             scanf("%d", &serial_num);
             int i = 0;
-            int flag = 0;
             for (i = 0; i < book_copies_number; i++) {
 
-                if (book_copies[i].serial_num == serial_num) {
+                if (book_copies[i]->serial_num == serial_num) {
                     if (choice == 1) {
-                       flag = borrow_copy(&book_copies[i], true);
+                       borrow_copy(book_copies[i], true);
                     } else {
-                       flag = borrow_copy(&book_copies[i], false);
+                       borrow_copy(book_copies[i], false);
 
                     }
 
                 }
             }
         } else if (choice == 9) {
+            for (i = 0; i < book_copies_number; i++) {
+                free(book_copies[i]);
+            }
+            free(book_copies);
             exit(0);
         } else {
             fprintf(stderr, INVALID_CHOICE);

@@ -6,6 +6,7 @@
 #define PRE_COURSE_1_C_AHMADAMARA_BOOKS_H
 
 #include "books_constants.h"
+#include "local_library.h"
 #include "stdio.h"
 #include <stdbool.h>
 #include <string.h>
@@ -44,7 +45,7 @@ typedef struct DRAMA{
 
 typedef struct COMEDY{
     int humor_quality;
-    char Humor_type;
+    char humor_type;
 }comedy;
 
 typedef union genre{
@@ -66,8 +67,12 @@ struct Book{
 
 
 void get_nice_book_name(char* dst, char* src);
-
+void print_non_fiction(const struct Book* pbook);
+void print_nicely(const struct Book* pbook);
+void print_most_promoted(const struct Book* pbook);
 char* get_genre_info(genre g, genre_type gt);
+
+
 
 char* get_zone_name(zone_type type);
 

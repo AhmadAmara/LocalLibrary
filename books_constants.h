@@ -12,7 +12,7 @@
 #define BOOK_NUM_FORMAT "book number = %d\n"
 #define BOOK_PROM_FORMAT "promotion = %d\n"
 #define ZONE_TYPE_FORMAT "zone_type = %s\n\n"
-#define GENRE_INFO_FORMAT "genre info = %s\n\n"
+#define GENRE_INFO_FORMAT "genre info ==>  %s\n\n"
 
 
 #define BOOK_INTERNAL_NUM_FORMAT "internal_book_num = %d\n"

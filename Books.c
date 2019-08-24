@@ -4,7 +4,7 @@
 
 #include "Books.h"
 static char* types_arr[5] =  {"KIDS", "HIGHSCHOOL", "ADULT", "DOCUMENTARY", "COMICS"};
-
+extern Book books[];
 char* get_zone_name(zone_type type){
 
     return types_arr[type] ;
@@ -14,12 +14,15 @@ char* get_zone_name(zone_type type){
 
 
 void print_book(Book *book){
+    char* temp = get_genre_info(book->_genre, book->gt);
+
     printf(BOOK_DETAILS_MESSAGE);
     printf(BOOK_NAME_FORMAT, book->name);
     printf(BOOK_NUM_FORMAT, book->book_num);
     printf(BOOK_PROM_FORMAT, book->promotion);
     printf(ZONE_TYPE_FORMAT, get_zone_name(book->zone));
-    printf(GENRE_INFO_FORMAT, get_genre_info(book->_genre, book->gt));
+    printf(GENRE_INFO_FORMAT,temp);
+    free(temp);
 }
 
 
@@ -177,8 +180,8 @@ char * get_genre_info(genre g, genre_type gt) {
     }else if(gt == 1){
         sprintf(genre_info_buff, "thrilling factor = %f\n", g._THRILLER);
     }else if(gt == 2){
-        sprintf(genre_info_buff, "humor quality = %d, plot quality = %c\n",
-                g._COMEDY.humor_quality, g._COMEDY.Humor_type);
+        sprintf(genre_info_buff, "humor quality = %d, humor type = %c\n",
+                g._COMEDY.humor_quality, g._COMEDY.humor_type);
     }else{
         sprintf(genre_info_buff, "non fiction filed = %s\n",g._NON_FICTION);
     }
@@ -186,8 +189,26 @@ char * get_genre_info(genre g, genre_type gt) {
     return genre_info_buff;
 }
 
+void print_nicely(const struct Book* pbook){
+    char* dst = (char*)malloc(sizeof(pbook->name));
+    get_nice_book_name(dst, pbook->name);
+    printf("%s\n", dst);
+    free(dst);
+}
 
+void print_non_fiction(const struct Book* pbook){
+    if(pbook->gt == NON_FICTION){
+        print_nicely(pbook);
+        printf("non fiction filed  = %s\n",pbook->_genre._NON_FICTION);
+    }
+}
 
+void print_most_promoted(const struct Book* pbook){
+        if(pbook->promotion > 50){
+            print_book(pbook);
+        }
+    }
+}
 
 
 
