@@ -172,8 +172,15 @@ char * get_genre_info(genre g, genre_type gt) {
 
 
     if(gt == 0){
-        sprintf(genre_info_buff, "text quality = %d, plot quality = %d",
+        sprintf(genre_info_buff, "text quality = %d, plot quality = %d\n",
                 g._DRAMA.text_quality, g._DRAMA.plot_quality);
+    }else if(gt == 1){
+        sprintf(genre_info_buff, "thrilling factor = %f\n", g._THRILLER);
+    }else if(gt == 2){
+        sprintf(genre_info_buff, "humor quality = %d, plot quality = %c\n",
+                g._COMEDY.humor_quality, g._COMEDY.Humor_type);
+    }else{
+        sprintf(genre_info_buff, "non fiction filed = %s\n",g._NON_FICTION);
     }
 
     return genre_info_buff;

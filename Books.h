@@ -51,6 +51,7 @@ typedef union genre{
     drama _DRAMA;
     float _THRILLER;
     comedy _COMEDY;
+    char* _NON_FICTION;
 }genre;
 
 
