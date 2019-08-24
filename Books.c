@@ -19,7 +19,7 @@ void print_book(Book *book){
     printf(BOOK_NUM_FORMAT, book->book_num);
     printf(BOOK_PROM_FORMAT, book->promotion);
     printf(ZONE_TYPE_FORMAT, get_zone_name(book->zone));
-    print(GENRE_INFO_FORMAT, get_genre_info(book->_genre, book->gt))
+    printf(GENRE_INFO_FORMAT, get_genre_info(book->_genre, book->gt));
 }
 
 
@@ -47,12 +47,13 @@ void print_copy(BookCopy *book){
 }
 
 
-int borrow_copy(BookCopy *book_copy,bool is_borrowing ){
-    book_copy->borrowing_times++;
+int borrow_copy(BookCopy *book_copy, bool is_borrowing ){
     if(is_borrowing == book_copy->is_borrowed){
-        printf((const char *) stderr, BORROWING_ERROR_MESSAGE);
+        fprintf(stderr, BORROWING_ERROR_MESSAGE);
         return -1;
     }
+    book_copy->borrowing_times++;
+
 
     book_copy->is_borrowed = is_borrowing;
     return 0;
@@ -166,11 +167,16 @@ void get_nice_book_name(char *dst, char *src) {
     dst[i] = '\0';
 }
 
-char *get_genre_info(genre g, genre_type gt) {
-    
-    if(gt == 0){
+char * get_genre_info(genre g, genre_type gt) {
+    char* genre_info_buff = (char*)malloc(sizeof(char)*100);
 
+
+    if(gt == 0){
+        sprintf(genre_info_buff, "text quality = %d, plot quality = %d",
+                g._DRAMA.text_quality, g._DRAMA.plot_quality);
     }
+
+    return genre_info_buff;
 }
 
 

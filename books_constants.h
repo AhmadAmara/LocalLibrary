@@ -25,12 +25,12 @@
 #define BOOKBINDER_MESSAGE "bookbinder_required\n"
 #define REPAIRABLE_MESSAGE "the book is repairable\n"
 #define OK_COND_MESSAGE "the book condition is ok\n"
-#define USELESS_MESSAGE "the book is useless"
+#define USELESS_MESSAGE "the book is useless\n"
 
 #define FIRST_SERIAL_NUM 10000
 #define ZERO_BITS 0
 #define INVALID_INTERNAL_NUM_MESSAGE "Invalid internal number ! "
 
 #define BORROWING_ERROR_MESSAGE "book is already borrowed while trying to borrow it, or is not borrowed while trying to return it to the library\n"
-
+#define INVALID_CHOICE "you chose invalid number please try again\n"
 #endif /*PRE_COURSE_1_C_AHMADAMARA_BOOKS_CONSTANTS_H*/

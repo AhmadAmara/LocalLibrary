@@ -10,7 +10,7 @@ extern Book books[];
 extern Book* find_book();
 
 
-int main2(int argc, char** argv) {
+int main(int argc, char** argv) {
     bool cover_problem, indexing_problem, bar_code_problem,spine_pages_problem, missing_pages_problem, stained_pages_problem;
     int yes_or_no;
     unsigned int book_copies_number;
@@ -102,11 +102,34 @@ int main2(int argc, char** argv) {
         free(bc);
 
     }
-    printf("\n%s\n%s\n", "borrowing stage :", "insert a number from the below :");
-    printf("1. Borrow a book-copy\n2. Return a book-copy\n9. Exit");
-    scanf("%d", &choice);
+    while(1) {
+        printf("\n%s\n%s\n", "borrowing stage :", "insert a number from the below :");
+        printf("1. Borrow a book-copy\n2. Return a book-copy\n9. Exit\n");
+        scanf("%d", &choice);
+        int serial_num;
+        if (choice == 1 || choice == 2) {
+            printf("Please input an serial book number : ");
+            scanf("%d", &serial_num);
+            int i = 0;
+            int flag = 0;
+            for (i = 0; i < book_copies_number; i++) {
 
-    /*if(choice == 1){}*/
+                if (book_copies[i].serial_num == serial_num) {
+                    if (choice == 1) {
+                       flag = borrow_copy(&book_copies[i], true);
+                    } else {
+                       flag = borrow_copy(&book_copies[i], false);
 
+                    }
+                    
+                }
+            }
+        } else if (choice == 9) {
+            exit(0);
+        } else {
+            fprintf(stderr, INVALID_CHOICE);
+            continue;
+        }
+    }
     return 0;
 }
