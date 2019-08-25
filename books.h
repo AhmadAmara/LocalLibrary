@@ -74,7 +74,7 @@ char* get_genre_info(genre g, genre_type gt);
 
 typedef void (*action)(const struct Book*);
 
-void do_for_books(Book **books, unsigned int num, action)
+void do_for_books(Book **books, unsigned int num, action);
 char* get_zone_name(zone_type type);
 
 void print_book(Book *book);
@@ -87,6 +87,10 @@ int borrow_copy(BookCopy *book_copy, bool is_borrowing );
 
 BookCopy* create_copy(int internal_num, bool cover_problem, bool indexing_problem, bool bar_code_problem,
                         bool spine_pages_problem, bool missing_pages_problem, bool stained_pages_problem);
+
+int get_min_promotion(Book* books);
+
+float get_min_thrilling_factor(Book* books);
 
 bool is_librarian_required(BookCopy* book);
 bool is_bookbinder_required(BookCopy* book);

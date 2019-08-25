@@ -4,11 +4,10 @@
 
 #ifndef PRE_COURSE_1_C_AHMADAMARA_LOCAL_LIBRARY_H
 #define PRE_COURSE_1_C_AHMADAMARA_LOCAL_LIBRARY_H
-#include "Books.h"
 
+#include "books.h"
 
-
-const Book* first_book();
+const struct Book* first_book();
 
 int num_of_books();
 

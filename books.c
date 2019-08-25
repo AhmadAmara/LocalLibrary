@@ -2,7 +2,11 @@
 // Created by ahmad on 7/29/19.
 */
 
-#include "Books.h"
+/*#define MIN(a,b) (((a)<(b))?(a):(b))*/
+
+
+#include "books.h"
+
 static char* types_arr[5] =  {"KIDS", "HIGHSCHOOL", "ADULT", "DOCUMENTARY", "COMICS"};
 extern Book books[];
 char* get_zone_name(zone_type type){
@@ -208,5 +212,32 @@ void print_most_promoted(const struct Book* pbook){
             print_book(pbook);
         }
     }
-    
 
+
+int get_min_promotion(Book* books)
+{
+    int i;
+    int min_promotion = books->promotion;
+
+    for(i = 1; i < num_of_books(); i++ ){
+        if ((books+i)->promotion < min_promotion){
+            min_promotion = (books+i)->promotion;
+        }
+    }
+    return min_promotion;
+}
+
+float get_min_thrilling_factor(Book* books)
+{
+    int i;
+    float min_thrilling_factor = 0.5f;
+
+    for(i = 1; i < num_of_books(); i++ ){
+        if ((books+i)->gt == THRILLER){
+            if((books+i)->_genre._THRILLER < min_thrilling_factor){
+                min_thrilling_factor = (books+i)->_genre._THRILLER ;
+            }
+        }
+    }
+    return min_thrilling_factor;
+}
