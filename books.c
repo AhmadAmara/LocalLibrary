@@ -2,7 +2,7 @@
 // Created by ahmad on 7/29/19.
 */
 
-/*#define MIN(a,b) (((a)<(b))?(a):(b))*/
+#define MIN(a,b) (((a)<(b))?(a):(b))
 
 
 #include "books.h"
@@ -220,9 +220,8 @@ int get_min_promotion(Book* books)
     int min_promotion = books->promotion;
 
     for(i = 1; i < num_of_books(); i++ ){
-        if ((books+i)->promotion < min_promotion){
-            min_promotion = (books+i)->promotion;
-        }
+            min_promotion = MIN((books+i)->promotion,min_promotion) ;
+
     }
     return min_promotion;
 }
@@ -234,10 +233,9 @@ float get_min_thrilling_factor(Book* books)
 
     for(i = 1; i < num_of_books(); i++ ){
         if ((books+i)->gt == THRILLER){
-            if((books+i)->_genre._THRILLER < min_thrilling_factor){
-                min_thrilling_factor = (books+i)->_genre._THRILLER ;
-            }
+            min_thrilling_factor = MIN((books+i)->_genre._THRILLER, min_thrilling_factor) ;
         }
     }
     return min_thrilling_factor;
 }
+

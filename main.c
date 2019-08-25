@@ -10,7 +10,7 @@ extern Book books[];
 extern Book* find_book();
 
 
-int main2(int argc, char** argv) {
+int main(int argc, char** argv) {
     bool cover_problem, indexing_problem, bar_code_problem,spine_pages_problem, missing_pages_problem, stained_pages_problem;
     int yes_or_no;
     unsigned int book_copies_number;
